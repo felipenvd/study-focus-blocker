@@ -5,19 +5,26 @@ Um bloqueador de sites simples e eficaz para te ajudar a manter o foco durante s
 ## 📋 Características
 
 - ✅ **Interface Gráfica Moderna** - Design intuitivo e bonito
-- ⏰ Timer visual com contagem regressiva em tempo real
-- 🚀 Atalhos rápidos (15, 25, 45, 60 minutos)
-- 🔒 Bloqueia automaticamente YouTube, Instagram e Facebook
-- 🔓 Desbloqueia automaticamente após o tempo definido
+- ⏰ **Seletor de Horas e Minutos** - Configure tempo em horas e minutos separadamente
+- 🚀 **Atalhos Rápidos** - Botões de 15min, 25min, 45min, 1h, 2h, 3h, 4h
+- ⏱️ **Timer Visual** - Contagem regressiva em tempo real (HH:MM:SS ou MM:SS)
+- 🔒 **Bloqueio Robusto** - Bloqueia YouTube, Instagram, Facebook e todas variações
+- 🌐 **Página Motivacional** - Ao acessar sites bloqueados, vê página bonita "Foque nos Estudos!"
+- 🔄 **Limpeza Automática de DNS** - Cache DNS limpo automaticamente ao bloquear
+- 🔓 **Desbloqueio Automático** - Sites liberados após o tempo definido
 - ⚡ Leve e sem consumo de recursos
 - 🖥️ Funciona em Windows, Linux e macOS
 - 🎨 Interface responsiva com efeitos visuais
 
 ## 🛠️ Como Funciona
 
-O programa modifica temporariamente o arquivo `hosts` do sistema operacional, redirecionando os domínios dos sites bloqueados para `127.0.0.1` (localhost). Isso impede que o navegador acesse esses sites enquanto o bloqueio estiver ativo.
+O programa funciona em 3 camadas para garantir bloqueio efetivo:
 
-Quando o tempo de estudo termina ou você interrompe o programa (Ctrl+C), os sites são automaticamente desbloqueados.
+1. **Modificação do arquivo hosts**: Redireciona domínios bloqueados para `127.0.0.1`
+2. **Servidor HTTP local**: Serve uma página motivacional bonita ao tentar acessar sites bloqueados
+3. **Limpeza de cache DNS**: Limpa automaticamente o cache para bloqueio imediato
+
+Quando o tempo termina ou você para o bloqueio, os sites são automaticamente desbloqueados e o servidor é encerrado.
 
 ## 📦 Requisitos
 
@@ -57,10 +64,27 @@ sudo python3 bloqueador_gui.py
 
 ### Uso da Interface Gráfica
 
-1. **Defina o tempo** - Digite os minutos ou clique nos atalhos rápidos (15, 25, 45, 60 min)
-2. **Clique em "Iniciar Bloqueio"** - Os sites serão bloqueados imediatamente
-3. **Acompanhe o timer** - Visualize o tempo restante em tempo real
-4. **Finalize** - Os sites são desbloqueados automaticamente ou clique em "Parar Bloqueio"
+1. **Defina o tempo**
+   - Digite horas e minutos separadamente (ex: 1h 30min)
+   - Ou clique nos atalhos rápidos: 15min, 25min, 45min, 1h, 2h, 3h, 4h
+
+2. **Clique em "Iniciar Bloqueio"**
+   - Sites são bloqueados imediatamente
+   - Cache DNS é limpo automaticamente
+   - Pop-up avisa para fechar completamente o navegador
+
+3. **Acompanhe o timer**
+   - Visualize o tempo restante em tempo real
+   - Formato HH:MM:SS (com horas) ou MM:SS (só minutos)
+
+4. **Teste o bloqueio**
+   - Feche e abra o navegador
+   - Tente acessar YouTube, Instagram ou Facebook
+   - Verá uma página motivacional linda "🎯 Foque nos Estudos!"
+
+5. **Finalize**
+   - Sites desbloqueiam automaticamente quando o tempo acaba
+   - Ou clique em "Parar Bloqueio" para interromper antes
 
 ### 📟 Versão Terminal (Alternativa)
 
@@ -87,11 +111,20 @@ Após executar:
 
 A interface moderna oferece:
 - 🎯 **Cabeçalho destacado** com o título do app
-- ⏰ **Seletor de tempo** com campo personalizável
-- 🚀 **Botões de atalho rápido** para tempos predefinidos
-- 📊 **Timer visual** mostrando tempo restante em MM:SS
-- 🔒 **Status do bloqueio** em tempo real
-- 📋 **Lista dos sites bloqueados**
+- ⏰ **Seletor de horas e minutos** - Campos separados para configuração precisa
+- 🚀 **Botões de atalho rápido** - 7 opções pré-configuradas (15min até 4h)
+- 📊 **Timer visual grande** - Mostrando tempo restante em HH:MM:SS ou MM:SS
+- 🔒 **Status do bloqueio** - Indicador visual em tempo real
+- 📋 **Lista completa de sites bloqueados** - Exibe todos os domínios dinamicamente
+
+### Página de Bloqueio Motivacional
+
+Ao tentar acessar sites bloqueados, você verá:
+- 🎨 **Design moderno** com gradiente roxo e animações
+- 🎯 **Mensagem motivacional** "Foque nos Estudos!"
+- 💭 **Frases inspiradoras** que mudam a cada 8 segundos
+- ⭐ **Efeitos visuais** com estrelas animadas no fundo
+- 📚 **Cards com dicas** de produtividade e estudo
 
 ### Versão Terminal
 
@@ -111,9 +144,18 @@ Digite os minutos (ex: 60): 60
 
 ## 🎯 Sites Bloqueados por Padrão
 
-- YouTube (www.youtube.com, youtube.com, m.youtube.com)
-- Instagram (www.instagram.com, instagram.com, m.instagram.com)
-- Facebook (www.facebook.com, facebook.com)
+### YouTube
+- youtube.com, www.youtube.com, m.youtube.com
+- youtu.be, www.youtu.be
+
+### Instagram
+- instagram.com, www.instagram.com, m.instagram.com
+
+### Facebook
+- facebook.com, www.facebook.com, m.facebook.com
+- web.facebook.com, fb.com, www.fb.com
+
+**Todas as variações são bloqueadas**, incluindo URLs completas como `https://www.youtube.com/`
 
 ### Personalizando Sites Bloqueados
 
@@ -133,13 +175,22 @@ sites_bloqueados = [
 
 ## ⚠️ Avisos Importantes
 
-- **Privilégios de Administrador:** O programa precisa de privilégios elevados para modificar o arquivo hosts
-- **Antivírus:** Alguns antivírus podem alertar sobre modificação do arquivo hosts - isso é normal
-- **Navegadores Abertos:** Feche e reabra o navegador após iniciar o bloqueio para garantir que funcione
-- **Cache DNS:** Em alguns casos, pode ser necessário limpar o cache DNS:
-  - Windows: `ipconfig /flushdns`
-  - Linux: `sudo systemd-resolve --flush-caches`
-  - macOS: `sudo dscacheutil -flushcache`
+### Requisitos de Execução
+- **Privilégios de Administrador:** O programa precisa de privilégios elevados para:
+  - Modificar o arquivo hosts
+  - Iniciar servidor HTTP na porta 80 (ou usa porta 8080 alternativa)
+  - Limpar cache DNS automaticamente
+
+### Compatibilidade com Navegadores
+- ✅ **Feche completamente o navegador** após iniciar o bloqueio
+- ✅ **O programa limpa o cache DNS automaticamente** - não precisa fazer manualmente
+- ✅ **Pop-up avisa** quando você deve fechar o navegador
+- ℹ️ Bloqueio funciona com: Chrome, Firefox, Edge, Safari, Opera, Brave
+
+### Antivírus e Segurança
+- **Alguns antivírus podem alertar** sobre modificação do arquivo hosts - isso é normal e seguro
+- O programa é 100% open-source - você pode revisar todo o código
+- Não coleta dados, não envia informações para internet
 
 ## 🧩 Técnicas de Estudo Recomendadas
 
@@ -164,9 +215,21 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 4. Push para a branch (`git push origin feature/NovaFeature`)
 5. Abrir um Pull Request
 
-## 📝 Ideias para Futuras Melhorias
+## 📝 Melhorias Implementadas e Futuras
 
-- [x] Interface gráfica (GUI) ✨
+### ✅ Já Implementado
+- [x] Interface gráfica moderna (GUI) ✨
+- [x] Seletor de horas e minutos separados
+- [x] Botões de atalho rápido (7 opções)
+- [x] Timer visual HH:MM:SS
+- [x] Página de bloqueio motivacional linda
+- [x] Servidor HTTP local integrado
+- [x] Limpeza automática de cache DNS
+- [x] Lista dinâmica de sites bloqueados
+- [x] Validações de tempo completas
+- [x] Aviso automático para fechar navegador
+
+### 🔮 Próximas Melhorias
 - [ ] Configuração via arquivo JSON
 - [ ] Estatísticas de tempo de estudo
 - [ ] Lista de sites personalizável via interface
@@ -175,6 +238,8 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - [ ] Som ao terminar sessão
 - [ ] Histórico de sessões de estudo
 - [ ] Gráficos de produtividade
+- [ ] Tema escuro/claro
+- [ ] Exportar dados de produtividade
 
 ## 📄 Licença
 
