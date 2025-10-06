@@ -9,7 +9,7 @@ Um bloqueador de sites simples e eficaz para te ajudar a manter o foco durante s
 - 🚀 **Atalhos Rápidos** - Botões de 15min, 25min, 45min, 1h, 2h, 3h, 4h
 - ⏱️ **Timer Visual** - Contagem regressiva em tempo real (HH:MM:SS ou MM:SS)
 - 🔒 **Bloqueio Robusto** - Bloqueia YouTube, Instagram, Facebook e todas variações
-- 🌐 **Página Motivacional** - Ao acessar sites bloqueados, vê página bonita "Foque nos Estudos!" (HTML embutido)
+- 🚫 **Bloqueio Efetivo** - Sites bloqueados mostram erro de conexão (sem bypass)
 - 🔄 **Limpeza Automática de DNS** - Cache DNS limpo automaticamente ao bloquear
 - 🔓 **Desbloqueio Automático** - Sites liberados após o tempo definido
 - ⚡ Leve e sem consumo de recursos
@@ -18,13 +18,14 @@ Um bloqueador de sites simples e eficaz para te ajudar a manter o foco durante s
 
 ## 🛠️ Como Funciona
 
-O programa funciona em 3 camadas para garantir bloqueio efetivo:
+O programa funciona em 2 camadas para garantir bloqueio efetivo:
 
-1. **Modificação do arquivo hosts**: Redireciona domínios bloqueados para `127.0.0.1`
-2. **Servidor HTTP local**: Serve uma página motivacional bonita (HTML embutido no código) ao tentar acessar sites bloqueados
-3. **Limpeza de cache DNS**: Limpa automaticamente o cache para bloqueio imediato
+1. **Modificação do arquivo hosts**: Redireciona domínios bloqueados para `127.0.0.1` (localhost)
+2. **Limpeza de cache DNS**: Limpa automaticamente o cache para bloqueio imediato
 
-Quando o tempo termina ou você para o bloqueio, os sites são automaticamente desbloqueados e o servidor é encerrado.
+Quando você tenta acessar sites bloqueados, verá um erro de conexão do navegador, impedindo o acesso completamente.
+
+Quando o tempo termina ou você para o bloqueio, os sites são automaticamente desbloqueados.
 
 ## 📦 Requisitos
 
@@ -122,15 +123,12 @@ A interface moderna oferece:
 - 🔒 **Status do bloqueio** - Indicador visual em tempo real
 - 📋 **Lista completa de sites bloqueados** - Exibe todos os domínios dinamicamente
 
-### Página de Bloqueio Motivacional
+### Resultado do Bloqueio
 
-Ao tentar acessar sites bloqueados, você verá uma página HTML bonita servida pelo servidor local:
-- 🎨 **Design moderno** com gradiente roxo e animações
-- 🎯 **Mensagem motivacional** "Foque nos Estudos!"
-- 💭 **Frases inspiradoras** que mudam a cada 8 segundos
-- ⭐ **Efeitos visuais** com estrelas animadas no fundo
-- 📚 **Cards com dicas** de produtividade e estudo
-- 💾 **HTML embutido** - Sem dependências de arquivos externos
+Ao tentar acessar sites bloqueados:
+- 🚫 **Erro de conexão** - O navegador não consegue acessar o site
+- 🔒 **Bloqueio total** - Sem possibilidade de bypass
+- ⚡ **Imediato** - Funciona instantaneamente após limpar o cache DNS
 
 ### Versão Terminal
 
@@ -183,8 +181,7 @@ sites_bloqueados = [
 
 ### Requisitos de Execução
 - **Privilégios de Administrador:** O programa precisa de privilégios elevados para:
-  - Modificar o arquivo hosts
-  - Iniciar servidor HTTP na porta 80 (ou usa porta 8080 alternativa)
+  - Modificar o arquivo hosts do sistema
   - Limpar cache DNS automaticamente
 
 ### Compatibilidade com Navegadores
@@ -228,13 +225,12 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - [x] Seletor de horas e minutos separados
 - [x] Botões de atalho rápido (7 opções)
 - [x] Timer visual HH:MM:SS
-- [x] Página de bloqueio motivacional linda (HTML embutido)
-- [x] Servidor HTTP local integrado
+- [x] Bloqueio robusto via arquivo hosts
 - [x] Limpeza automática de cache DNS
 - [x] Lista dinâmica de sites bloqueados
 - [x] Validações de tempo completas
 - [x] Aviso automático para fechar navegador
-- [x] Sem dependências de arquivos externos
+- [x] Sem dependências externas (apenas Python stdlib)
 
 ### 🔮 Próximas Melhorias
 - [ ] Configuração via arquivo JSON

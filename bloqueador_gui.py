@@ -4,8 +4,6 @@ import time
 import os
 import sys
 import threading
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-import socket
 import subprocess
 
 # Caminho do arquivo hosts dependendo do sistema operacional
@@ -52,8 +50,6 @@ class BloqueadorGUI:
         self.timer_rodando = False
         self.tempo_restante = 0
         self.thread_timer = None
-        self.servidor_http = None
-        self.thread_servidor = None
 
         # Cores do tema
         self.cor_primaria = "#6366f1"
@@ -311,277 +307,6 @@ class BloqueadorGUI:
 
             messagebox.showerror("Permissão Negada", msg)
 
-    def iniciar_servidor(self):
-        """Inicia o servidor HTTP para servir a página de bloqueio"""
-        # HTML embutido da página de bloqueio
-        HTML_BLOQUEIO = """<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 Foque nos Estudos!</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            color: white;
-            padding: 40px;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .icon {
-            font-size: 120px;
-            margin-bottom: 30px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 24px;
-            margin-bottom: 40px;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        .message {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px 50px;
-            margin: 30px auto;
-            max-width: 600px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .message p {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .quote {
-            font-style: italic;
-            font-size: 20px;
-            margin-top: 30px;
-            opacity: 0.9;
-        }
-
-        .tips {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 800px;
-            margin: 40px auto;
-        }
-
-        .tip {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
-        }
-
-        .tip:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .tip-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .tip-text {
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        .footer {
-            margin-top: 50px;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-    </style>
-</head>
-<body>
-    <div class="stars" id="stars"></div>
-
-    <div class="container">
-        <div class="icon">🎯</div>
-        <h1>Site Bloqueado!</h1>
-        <div class="subtitle">Este site está temporariamente inacessível</div>
-
-        <div class="message">
-            <p>🚀 <strong>Foque nos seus estudos!</strong></p>
-            <p>Você bloqueou este site para manter a concentração e produtividade.</p>
-            <p>Aproveite este tempo para alcançar seus objetivos! 💪</p>
-        </div>
-
-        <div class="quote">
-            "O sucesso é a soma de pequenos esforços repetidos dia após dia."
-        </div>
-
-        <div class="tips">
-            <div class="tip">
-                <div class="tip-icon">📚</div>
-                <div class="tip-text">Mantenha o foco total</div>
-            </div>
-            <div class="tip">
-                <div class="tip-icon">⏰</div>
-                <div class="tip-text">Respeite seu tempo</div>
-            </div>
-            <div class="tip">
-                <div class="tip-icon">🏆</div>
-                <div class="tip-text">Alcance seus objetivos</div>
-            </div>
-            <div class="tip">
-                <div class="tip-icon">💡</div>
-                <div class="tip-text">Aprenda algo novo</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            🔒 Bloqueado pelo Bloqueador de Sites para Estudos
-        </div>
-    </div>
-
-    <script>
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 50; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
-
-        const quotes = [
-            '"O sucesso é a soma de pequenos esforços repetidos dia após dia."',
-            '"A disciplina é a ponte entre metas e conquistas."',
-            '"Foco é a arte de saber o que ignorar."',
-            '"Cada minuto estudando é um passo em direção ao sucesso."',
-            '"O futuro pertence àqueles que acreditam na beleza de seus sonhos."',
-            '"Quanto mais você estuda, mais sorte você tem."',
-            '"A concentração é o segredo de toda força."'
-        ];
-
-        let currentQuote = 0;
-        const quoteElement = document.querySelector('.quote');
-
-        setInterval(() => {
-            currentQuote = (currentQuote + 1) % quotes.length;
-            quoteElement.style.opacity = '0';
-            setTimeout(() => {
-                quoteElement.textContent = quotes[currentQuote];
-                quoteElement.style.opacity = '0.9';
-            }, 300);
-        }, 8000);
-
-        quoteElement.style.transition = 'opacity 0.3s ease';
-    </script>
-</body>
-</html>"""
-
-        class CustomHandler(SimpleHTTPRequestHandler):
-            def do_GET(self):
-                # Sempre serve a página de bloqueio para qualquer requisição
-                self.send_response(200)
-                self.send_header('Content-type', 'text/html; charset=utf-8')
-                self.end_headers()
-                self.wfile.write(HTML_BLOQUEIO.encode('utf-8'))
-
-            def log_message(self, format_str, *args):
-                pass  # Silencia logs do servidor
-
-        try:
-            # Tenta usar a porta 80 primeiro (requer admin), senão usa 8080
-            porta = 80
-            try:
-                self.servidor_http = HTTPServer(('127.0.0.1', porta), CustomHandler)
-            except:
-                porta = 8080
-                self.servidor_http = HTTPServer(('127.0.0.1', porta), CustomHandler)
-
-            # Inicia servidor em thread separada
-            self.thread_servidor = threading.Thread(target=self.servidor_http.serve_forever, daemon=True)
-            self.thread_servidor.start()
-            return porta
-        except Exception as e:
-            print(f"Erro ao iniciar servidor: {e}")
-            return None
-
-    def parar_servidor(self):
-        """Para o servidor HTTP"""
-        if self.servidor_http:
-            self.servidor_http.shutdown()
-            self.servidor_http = None
 
     def limpar_cache_dns(self):
         """Limpa o cache DNS do sistema"""
@@ -612,21 +337,12 @@ class BloqueadorGUI:
     def bloquear_sites(self):
         """Adiciona os sites bloqueados ao arquivo hosts"""
         try:
-            # Inicia o servidor HTTP
-            porta = self.iniciar_servidor()
-            if not porta:
-                messagebox.showwarning("Aviso", "Não foi possível iniciar o servidor de bloqueio")
-                return False
-
-            # Define o IP de redirecionamento
-            redirect_ip = f"127.0.0.1"
-
             with open(hosts_path, 'r+') as arquivo:
                 conteudo = arquivo.read()
 
                 for site in sites_bloqueados:
                     if site not in conteudo:
-                        arquivo.write(f"\n{redirect_ip} {site}")
+                        arquivo.write(f"\n{redirect} {site}")
 
             self.bloqueado = True
             self.status_label.config(text="🔒 Sites bloqueados!", fg=self.cor_sucesso)
@@ -640,7 +356,8 @@ class BloqueadorGUI:
                 "Sites bloqueados com sucesso!\n\n"
                 "⚠️ IMPORTANTE:\n"
                 "• Feche COMPLETAMENTE o navegador\n"
-                "• Abra novamente para o bloqueio funcionar\n\n"
+                "• Abra novamente para o bloqueio funcionar\n"
+                "• Sites bloqueados mostrarão erro de conexão\n\n"
                 "Bons estudos! 📚"
             )
 
@@ -745,7 +462,6 @@ class BloqueadorGUI:
         """Para o bloqueio e desbloqueia os sites"""
         self.timer_rodando = False
         if self.desbloquear_sites():
-            self.parar_servidor()  # Para o servidor HTTP
             self.timer_label.config(text="00:00")
             self.btn_principal.config(
                 text="🚀 Iniciar Bloqueio",
@@ -757,7 +473,6 @@ class BloqueadorGUI:
         """Garante que os sites sejam desbloqueados ao fechar"""
         if self.bloqueado:
             self.desbloquear_sites()
-        self.parar_servidor()  # Para o servidor se estiver rodando
         self.root.destroy()
 
 def main():
