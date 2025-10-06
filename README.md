@@ -9,7 +9,7 @@ Um bloqueador de sites simples e eficaz para te ajudar a manter o foco durante s
 - 🚀 **Atalhos Rápidos** - Botões de 15min, 25min, 45min, 1h, 2h, 3h, 4h
 - ⏱️ **Timer Visual** - Contagem regressiva em tempo real (HH:MM:SS ou MM:SS)
 - 🔒 **Bloqueio Robusto** - Bloqueia YouTube, Instagram, Facebook e todas variações
-- 🌐 **Página Motivacional** - Ao acessar sites bloqueados, vê página bonita "Foque nos Estudos!"
+- 🌐 **Página Motivacional** - Ao acessar sites bloqueados, vê página bonita "Foque nos Estudos!" (HTML embutido)
 - 🔄 **Limpeza Automática de DNS** - Cache DNS limpo automaticamente ao bloquear
 - 🔓 **Desbloqueio Automático** - Sites liberados após o tempo definido
 - ⚡ Leve e sem consumo de recursos
@@ -21,7 +21,7 @@ Um bloqueador de sites simples e eficaz para te ajudar a manter o foco durante s
 O programa funciona em 3 camadas para garantir bloqueio efetivo:
 
 1. **Modificação do arquivo hosts**: Redireciona domínios bloqueados para `127.0.0.1`
-2. **Servidor HTTP local**: Serve uma página motivacional bonita ao tentar acessar sites bloqueados
+2. **Servidor HTTP local**: Serve uma página motivacional bonita (HTML embutido no código) ao tentar acessar sites bloqueados
 3. **Limpeza de cache DNS**: Limpa automaticamente o cache para bloqueio imediato
 
 Quando o tempo termina ou você para o bloqueio, os sites são automaticamente desbloqueados e o servidor é encerrado.
@@ -40,6 +40,11 @@ cd bloqueador-sites
 ```
 
 2. Não há dependências externas! O programa usa apenas bibliotecas nativas do Python.
+
+**Arquivos do projeto:**
+- `bloqueador_gui.py` - Interface gráfica completa (recomendado)
+- `bloqueador.py` - Versão simplificada para terminal
+- `README.md` - Documentação
 
 ## 💻 Como Usar
 
@@ -119,12 +124,13 @@ A interface moderna oferece:
 
 ### Página de Bloqueio Motivacional
 
-Ao tentar acessar sites bloqueados, você verá:
+Ao tentar acessar sites bloqueados, você verá uma página HTML bonita servida pelo servidor local:
 - 🎨 **Design moderno** com gradiente roxo e animações
 - 🎯 **Mensagem motivacional** "Foque nos Estudos!"
 - 💭 **Frases inspiradoras** que mudam a cada 8 segundos
 - ⭐ **Efeitos visuais** com estrelas animadas no fundo
 - 📚 **Cards com dicas** de produtividade e estudo
+- 💾 **HTML embutido** - Sem dependências de arquivos externos
 
 ### Versão Terminal
 
@@ -222,12 +228,13 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - [x] Seletor de horas e minutos separados
 - [x] Botões de atalho rápido (7 opções)
 - [x] Timer visual HH:MM:SS
-- [x] Página de bloqueio motivacional linda
+- [x] Página de bloqueio motivacional linda (HTML embutido)
 - [x] Servidor HTTP local integrado
 - [x] Limpeza automática de cache DNS
 - [x] Lista dinâmica de sites bloqueados
 - [x] Validações de tempo completas
 - [x] Aviso automático para fechar navegador
+- [x] Sem dependências de arquivos externos
 
 ### 🔮 Próximas Melhorias
 - [ ] Configuração via arquivo JSON
