@@ -20,7 +20,16 @@ sites_bloqueados = [
     "m.youtube.com",
     "m.instagram.com",
     "www.facebook.com",
-    "facebook.com"
+    "facebook.com",
+    "web.whatsapp.com",
+    "www.whatsapp.com",
+    "whatsapp.com",
+    "x.com",
+    "www.x.com",
+    "twitter.com",
+    "www.twitter.com",
+    "mobile.twitter.com",
+    "m.twitter.com"
 ]
 
 def bloquear_sites():

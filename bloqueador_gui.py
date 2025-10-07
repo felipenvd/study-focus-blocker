@@ -35,7 +35,20 @@ sites_bloqueados = [
     "m.facebook.com",
     "web.facebook.com",
     "fb.com",
-    "www.fb.com"
+    "www.fb.com",
+
+    # WhatsApp
+    "web.whatsapp.com",
+    "www.whatsapp.com",
+    "whatsapp.com",
+
+    # X (Twitter)
+    "x.com",
+    "www.x.com",
+    "twitter.com",
+    "www.twitter.com",
+    "mobile.twitter.com",
+    "m.twitter.com"
 ]
 
 class BloqueadorGUI:

@@ -159,6 +159,13 @@ Digite os minutos (ex: 60): 60
 - facebook.com, www.facebook.com, m.facebook.com
 - web.facebook.com, fb.com, www.fb.com
 
+### WhatsApp
+- web.whatsapp.com, www.whatsapp.com, whatsapp.com
+
+### X (Twitter)
+- x.com, www.x.com
+- twitter.com, www.twitter.com, mobile.twitter.com, m.twitter.com
+
 **Todas as variações são bloqueadas**, incluindo URLs completas como `https://www.youtube.com/`
 
 ### Personalizando Sites Bloqueados
