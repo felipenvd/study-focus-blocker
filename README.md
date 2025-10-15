@@ -115,6 +115,8 @@ Após executar:
 
 ### Interface Gráfica
 
+![Interface do Bloqueador](interface_bloqueador.png)
+
 A interface moderna oferece:
 - 🎯 **Cabeçalho destacado** com o título do app
 - ⏰ **Seletor de horas e minutos** - Campos separados para configuração precisa
