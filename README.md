@@ -217,17 +217,8 @@ Use o bloqueador com sessões de:
 - 50-60 minutos de estudo profundo
 - 10-15 minutos de pausa
 
-## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para:
-
-1. Fazer um fork do projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/NovaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/NovaFeature`)
-5. Abrir um Pull Request
-
-## 📝 Melhorias Implementadas e Futuras
+## 📝 Melhorias Implementadas
 
 ### ✅ Já Implementado
 - [x] Interface gráfica moderna (GUI) ✨
@@ -240,22 +231,6 @@ Contribuições são bem-vindas! Sinta-se à vontade para:
 - [x] Validações de tempo completas
 - [x] Aviso automático para fechar navegador
 - [x] Sem dependências externas (apenas Python stdlib)
-
-### 🔮 Próximas Melhorias
-- [ ] Configuração via arquivo JSON
-- [ ] Estatísticas de tempo de estudo
-- [ ] Lista de sites personalizável via interface
-- [ ] Modo "trabalho" vs "estudo"
-- [ ] Notificações desktop ao finalizar
-- [ ] Som ao terminar sessão
-- [ ] Histórico de sessões de estudo
-- [ ] Gráficos de produtividade
-- [ ] Tema escuro/claro
-- [ ] Exportar dados de produtividade
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ## 🙏 Agradecimentos
 
