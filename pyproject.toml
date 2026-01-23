@@ -1,0 +1,10 @@
+[project]
+name = "study-focus-blocker"
+version = "0.1.0"
+description = "A website blocker to help maintain focus during study sessions."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flet>=0.80.3",
+    "flet-desktop-light>=0.80.3",
+]
